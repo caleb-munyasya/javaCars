@@ -174,5 +174,32 @@ public class VehicleService {
 
         return newAutomaker;
     }
+    public String vehicleIsUnique () {
+        Scanner scInput = new Scanner(System.in);
+        boolean duplicateFound = false;
+        boolean passsedDuplicateCheck = false;
+        String newModel = "";
+
+        while (!passsedDuplicateCheck) {
+            duplicateFound = false;
+            System.out.println("-------------------------------------------------------------");
+            System.out.println("Please enter a UNIQUE model of the vehicle you would like to add: ");
+            newModel = scInput.nextLine();
+
+            for (int i = 0; i < vehicleRepository.vehicleArray.length; i++) {
+                if (vehicleRepository.vehicleArray[i].getModel().equals(newModel)) {
+                    duplicateFound = true;
+                }
+            }
+
+            if (duplicateFound == true) {
+                passsedDuplicateCheck = false;
+            }
+            else {
+                passsedDuplicateCheck = true;
+            }
+        }
+        return newModel;
+    }
 }
 

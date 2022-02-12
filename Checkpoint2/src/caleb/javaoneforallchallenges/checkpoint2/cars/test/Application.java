@@ -42,8 +42,9 @@ public class Application {
             if (userMenuChoice == 3) {
                 Scanner sc3 = new Scanner(System.in);
                 System.out.println("You are about to add a new vehicle to the database.");
-                System.out.println("Please enter the vehicle model: ");
-                String newModel = sc3.nextLine();
+
+                String newModel = vehicleService.vehicleIsUnique();
+
                 System.out.println("Please enter the color of the " + newModel + ": ");
                 String newColor = sc3.nextLine();
                 int newYear = 1;
@@ -60,8 +61,6 @@ public class Application {
                 //Printing updated list of Automaker's model
                 Vehicle[] searchResultNew = vehicleService.searchByAutomaker(vehicleService.vehicleRepository.vehicleArray, newVehicle.automaker.getName());
                 carsMenu.printAvailableModels(searchResultNew);
-
-                System.out.println("This Vehicle now has the following attributes:");
 
                 if (!carsMenu.returnToMainMenu()){
                     exitProgram =true;
@@ -93,7 +92,7 @@ public class Application {
                 if (featureToUpdate == 1) {
                     System.out.println("-------------------------------------------------------------");
                     System.out.println("Please enter the new Model name: ");
-                    String newModel = sc5.nextLine();
+                    String newModel = vehicleService.vehicleIsUnique();
                     updatedModel = newModel;
                     updateVehicle.setModel(newModel);
                 }
