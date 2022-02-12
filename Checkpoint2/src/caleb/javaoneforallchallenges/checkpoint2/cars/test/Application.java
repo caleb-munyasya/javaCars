@@ -46,9 +46,11 @@ public class Application {
                 String newModel = sc3.nextLine();
                 System.out.println("Please enter the color of the " + newModel + ": ");
                 String newColor = sc3.nextLine();
-                System.out.println("Please enter the Year in which the " + newModel + " was made: ");
-                int newYear = sc3.nextInt();
-
+                int newYear = 1;
+                while (!(newYear >= 1980 && newYear <= 2022)) {
+                    System.out.println("Please enter the Year in which the " + newModel + " was made: ");
+                    newYear = sc3.nextInt();
+                }
                 //Making sure the car model is made by an existing Automaker
                 int newAutomakerSelection = 100;
                 while (!(newAutomakerSelection > 0 && newAutomakerSelection < 7)) {

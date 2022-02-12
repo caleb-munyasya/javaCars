@@ -80,7 +80,7 @@ public class VehicleService {
             }
             if (!validModel) {
                 System.out.println("What model are you looking for?");
-                System.out.println("** tip: Try to only capitalize the first letter");
+                System.out.println("** tip: Try to only capitalize the first letter. For e.g. 'Polo' ");
                 userSearchTerm = sc.nextLine();
             }
         }
@@ -140,9 +140,6 @@ public class VehicleService {
             }
 
         }
-
-        System.out.println(vehicleRepository.vehicleArray.length);
-        System.out.println(updatedArray.length);
 
         vehicleRepository.vehicleArray = updatedArray;
 
