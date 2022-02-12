@@ -1,7 +1,5 @@
 package caleb.javaoneforallchallenges.checkpoint2.cars.domain;
 
-import caleb.javaoneforallchallenges.checkpoint2.cars.test.CarsMenu;
-
 import java.util.Scanner;
 
 public class VehicleService {

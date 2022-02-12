@@ -1,4 +1,4 @@
-package caleb.javaoneforallchallenges.checkpoint2.cars.test;
+package caleb.javaoneforallchallenges.checkpoint2.cars.domain;
 
 import caleb.javaoneforallchallenges.checkpoint2.cars.domain.Automaker;
 import caleb.javaoneforallchallenges.checkpoint2.cars.domain.Vehicle;
