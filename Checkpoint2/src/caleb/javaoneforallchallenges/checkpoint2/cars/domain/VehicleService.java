@@ -41,24 +41,6 @@ public class VehicleService {
             }
         }
 
-
-
-//        int finalArraySize = 0;
-//        for (int i = 0; i < userSearchResultArray.length; i++) {
-//            if (!userSearchResultArray[i].equals(null)) {
-//                finalArraySize ++;
-//            } else {
-//                continue;
-//            }
-//        }
-
-//        System.out.println(finalArraySize);
-//
-//        Vehicle[] finalArray = new Vehicle[finalArraySize];
-//        for (int i = 0; i < finalArraySize; i++) {
-//            finalArray[i] = userSearchResultArray[i];
-//        }
-
         return userSearchResultArray;
 }
 
@@ -150,6 +132,47 @@ public class VehicleService {
         }
 
 
+    }
+
+    public Automaker automakerCheck () {
+        //Making sure the car model is made by an existing Automaker
+        Scanner sc7 = new Scanner(System.in);
+        int newAutomakerSelection = 100;
+        while (!(newAutomakerSelection > 0 && newAutomakerSelection < 7)) {
+            System.out.println("Please select which automaker created this model:");
+            System.out.println("1 - GM");
+            System.out.println("2 - Hyundai");
+            System.out.println("3 - Volkswagon");
+            System.out.println("4 - Audi");
+            System.out.println("5 - Mercedes");
+            System.out.println("6 - Peugeot");
+
+            newAutomakerSelection = sc7.nextInt();
+        }
+
+        //Setting Vehicle's automaker equal to one in database
+        Automaker newAutomaker = null;
+
+        if (newAutomakerSelection == 1) {
+            newAutomaker = vehicleRepository.automakerArray[0];
+        }
+        if (newAutomakerSelection == 2) {
+            newAutomaker = vehicleRepository.automakerArray[1];
+        }
+        if (newAutomakerSelection == 3) {
+            newAutomaker = vehicleRepository.automakerArray[2];
+        }
+        if (newAutomakerSelection == 4) {
+            newAutomaker = vehicleRepository.automakerArray[3];
+        }
+        if (newAutomakerSelection == 5) {
+            newAutomaker = vehicleRepository.automakerArray[4];
+        }
+        if (newAutomakerSelection == 6) {
+            newAutomaker = vehicleRepository.automakerArray[5];
+        }
+
+        return newAutomaker;
     }
 }
 

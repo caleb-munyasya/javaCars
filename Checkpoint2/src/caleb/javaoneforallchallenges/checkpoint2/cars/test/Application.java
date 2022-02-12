@@ -51,41 +51,8 @@ public class Application {
                     System.out.println("Please enter the Year in which the " + newModel + " was made: ");
                     newYear = sc3.nextInt();
                 }
-                //Making sure the car model is made by an existing Automaker
-                int newAutomakerSelection = 100;
-                while (!(newAutomakerSelection > 0 && newAutomakerSelection < 7)) {
-                    System.out.println("Please select which automaker created this model:");
-                    System.out.println("1 - GM");
-                    System.out.println("2 - Hyundai");
-                    System.out.println("3 - Volkswagon");
-                    System.out.println("4 - Audi");
-                    System.out.println("5 - Mercedes");
-                    System.out.println("6 - Peugeot");
-
-                    newAutomakerSelection = sc.nextInt();
-                }
-
-                //Setting Vehicle's automaker equal to one in database
-                Automaker newAutomaker = null;
-
-                if (newAutomakerSelection == 1) {
-                    newAutomaker = vehicleService.vehicleRepository.automakerArray[0];
-                }
-                if (newAutomakerSelection == 2) {
-                    newAutomaker = vehicleService.vehicleRepository.automakerArray[1];
-                }
-                if (newAutomakerSelection == 3) {
-                    newAutomaker = vehicleService.vehicleRepository.automakerArray[2];
-                }
-                if (newAutomakerSelection == 4) {
-                    newAutomaker = vehicleService.vehicleRepository.automakerArray[3];
-                }
-                if (newAutomakerSelection == 5) {
-                    newAutomaker = vehicleService.vehicleRepository.automakerArray[4];
-                }
-                if (newAutomakerSelection == 6) {
-                    newAutomaker = vehicleService.vehicleRepository.automakerArray[5];
-                }
+                //Automaker existence Check
+                Automaker newAutomaker = vehicleService.automakerCheck();
 
                 Vehicle newVehicle = new Vehicle(newModel,newColor,newYear, newAutomaker);
                 vehicleService.addVehicle(newVehicle);
@@ -95,9 +62,6 @@ public class Application {
                 carsMenu.printAvailableModels(searchResultNew);
 
                 System.out.println("This Vehicle now has the following attributes:");
-
-
-
 
                 if (!carsMenu.returnToMainMenu()){
                     exitProgram =true;
@@ -147,41 +111,7 @@ public class Application {
                 }
                 if (featureToUpdate == 4) {
                     System.out.println("-------------------------------------------------------------");
-                    int newAutomakerSelection = 100;
-                    while (!(newAutomakerSelection > 0 && newAutomakerSelection < 7)) {
-                        System.out.println("Please select which automaker created this model:");
-                        System.out.println("1 - GM");
-                        System.out.println("2 - Hyundai");
-                        System.out.println("3 - Volkswagon");
-                        System.out.println("4 - Audi");
-                        System.out.println("5 - Mercedes");
-                        System.out.println("6 - Peugeot");
-
-                        newAutomakerSelection = sc.nextInt();
-                    }
-
-                    //Setting Vehicle's automaker equal to one in database
-                    Automaker newAutomaker = null;
-
-                    if (newAutomakerSelection == 1) {
-                        newAutomaker = vehicleService.vehicleRepository.automakerArray[0];
-                    }
-                    if (newAutomakerSelection == 2) {
-                        newAutomaker = vehicleService.vehicleRepository.automakerArray[1];
-                    }
-                    if (newAutomakerSelection == 3) {
-                        newAutomaker = vehicleService.vehicleRepository.automakerArray[2];
-                    }
-                    if (newAutomakerSelection == 4) {
-                        newAutomaker = vehicleService.vehicleRepository.automakerArray[3];
-                    }
-                    if (newAutomakerSelection == 5) {
-                        newAutomaker = vehicleService.vehicleRepository.automakerArray[4];
-                    }
-                    if (newAutomakerSelection == 6) {
-                        newAutomaker = vehicleService.vehicleRepository.automakerArray[5];
-                    }
-
+                    Automaker newAutomaker = vehicleService.automakerCheck();
                     updateVehicle.automaker = newAutomaker;
                 }
 
