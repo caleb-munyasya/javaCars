@@ -12,16 +12,19 @@ public class Application {
         VehicleService vehicleService = new VehicleService();
         CarsMenu carsMenu = new CarsMenu();
         Scanner sc = new Scanner(System.in);
-        boolean exitProgram = false;
 
+        //Looping to keep the program alive until the User exits
+        boolean exitProgram = false;
         while (!exitProgram) {
 
+            //Showing Main Menu
             int userMenuChoice = 10;
-            while (userMenuChoice != 0 && userMenuChoice != 1 && userMenuChoice != 2 && userMenuChoice != 3 && userMenuChoice != 4 && userMenuChoice != 5) {
+            while (userMenuChoice < 0 || userMenuChoice > 5) {
                 carsMenu.printCarMenu();
                 userMenuChoice = sc.nextInt();
             }
 
+            //Search by Automaker
             if (userMenuChoice == 1) {
                 Vehicle[] searchResult = vehicleService.searchByAutomaker(vehicleService.vehicleRepository.vehicleArray, null);
                 carsMenu.printAvailableModels(searchResult);
@@ -29,54 +32,61 @@ public class Application {
                     exitProgram = true;
                 }
             }
+
+            //Search by Model
             if (userMenuChoice == 2) {
                 Vehicle vehicleSelection = vehicleService.searchByModel(vehicleService.vehicleRepository.vehicleArray, null);
                 vehicleSelection.prettyPrint();
 
-                if (!carsMenu.returnToMainMenu()){
-                    exitProgram =true;
+                if (!carsMenu.returnToMainMenu()) {
+                    exitProgram = true;
                 }
-
             }
 
+            // Add new Vehicle model to Vehicle Repository
             if (userMenuChoice == 3) {
                 Scanner sc3 = new Scanner(System.in);
-                System.out.println("You are about to add a new vehicle to the database.");
 
+                System.out.println("You are about to add a new vehicle to the database.");
                 String newModel = vehicleService.vehicleIsUnique();
 
                 System.out.println("Please enter the color of the " + newModel + ": ");
                 String newColor = sc3.nextLine();
+
                 int newYear = 1;
                 while (!(newYear >= 1980 && newYear <= 2022)) {
                     System.out.println("Please enter the Year in which the " + newModel + " was made: ");
                     newYear = sc3.nextInt();
                 }
-                //Automaker existence Check
+                //Checking if Automaker is a part of the Database
                 Automaker newAutomaker = vehicleService.automakerCheck();
 
-                Vehicle newVehicle = new Vehicle(newModel,newColor,newYear, newAutomaker);
+                //Adding new Vehicle to the Repository
+                Vehicle newVehicle = new Vehicle(newModel, newColor, newYear, newAutomaker);
                 vehicleService.addVehicle(newVehicle);
 
                 //Printing updated list of Automaker's model
                 Vehicle[] searchResultNew = vehicleService.searchByAutomaker(vehicleService.vehicleRepository.vehicleArray, newVehicle.automaker.getName());
                 carsMenu.printAvailableModels(searchResultNew);
 
-                if (!carsMenu.returnToMainMenu()){
-                    exitProgram =true;
+                if (!carsMenu.returnToMainMenu()) {
+                    exitProgram = true;
                 }
 
             }
 
+            //Update Vehicle
             if (userMenuChoice == 4) {
                 Scanner sc4 = new Scanner(System.in);
                 Scanner sc5 = new Scanner(System.in);
                 Vehicle vehicleSelection = vehicleService.searchByModel(vehicleService.vehicleRepository.vehicleArray, null);
                 vehicleSelection.prettyPrint();
-                Vehicle updateVehicle = new Vehicle(vehicleSelection.getModel(), vehicleSelection.getColor(), vehicleSelection.getYear(), vehicleSelection.automaker);
+                Vehicle updateVehicle = new Vehicle(vehicleSelection.getModel(), vehicleSelection.getColor(),
+                        vehicleSelection.getYear(), vehicleSelection.automaker);
+
                 String updatedModel = updateVehicle.getModel();
 
-
+                //Allowing selection for which vehicle attribute to update
                 int featureToUpdate = 100;
                 while (!(featureToUpdate > 0 && featureToUpdate < 5)) {
                     System.out.println("Please select attribute would you like to update:");
@@ -121,20 +131,21 @@ public class Application {
                 Vehicle searchResult = vehicleService.searchByModel(vehicleService.vehicleRepository.vehicleArray, updatedModel);
                 searchResult.prettyPrint();
 
-                if (!carsMenu.returnToMainMenu()){
-                    exitProgram =true;
+                if (!carsMenu.returnToMainMenu()) {
+                    exitProgram = true;
                 }
 
             }
 
+            //Delete Vehicle
             if (userMenuChoice == 5) {
                 Scanner sc6 = new Scanner(System.in);
                 System.out.println("What is the model of the vehicle you would like to remove from the repository?");
                 String modelToDelete = sc6.nextLine();
                 vehicleService.deleteVehicleByModel(modelToDelete);
 
-                if (!carsMenu.returnToMainMenu()){
-                    exitProgram =true;
+                if (!carsMenu.returnToMainMenu()) {
+                    exitProgram = true;
                 }
 
             }

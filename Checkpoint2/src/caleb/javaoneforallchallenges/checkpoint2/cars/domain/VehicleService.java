@@ -9,7 +9,6 @@ public class VehicleService {
         Scanner sc = new Scanner(System.in);
         String userSearchTerm = searchTermPassed;
         boolean validAutomaker = false;
-        String[] automaker = new String[6];
         Vehicle[] userSearchResultArray = new Vehicle[3];
 
         while (!validAutomaker) {
