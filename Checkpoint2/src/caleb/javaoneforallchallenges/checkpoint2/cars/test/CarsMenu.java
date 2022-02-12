@@ -16,7 +16,9 @@ public class CarsMenu {
                 "------------------------------------------------------------------------------\n" +
                 "1 - Search by Automaker\n" +
                 "2 - Search by Model\n" +
-                "3 - Add new Vehicle model to Vehicle Repository" +
+                "3 - Add new Vehicle model to Vehicle Repository\n" +
+                "4 - Update Vehicle\n" +
+                "5 - Delete Vehicle\n" +
                 "\n------------------------------------------------------------------------------" +
                 "\n*** (You can also press '0' to exit the program) ***" +
                 "\n------------------------------------------------------------------------------" +

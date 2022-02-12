@@ -7,17 +7,14 @@ import java.util.Scanner;
 public class VehicleService {
     public VehicleRepository vehicleRepository = new VehicleRepository();
 
-    public Vehicle[] searchByAutomaker(Vehicle[] vehicles) {
+    public Vehicle[] searchByAutomaker(Vehicle[] vehicles, String searchTermPassed) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("What automaker's vehicles are you searching for? ");
-        String userSearchTerm;
+        String userSearchTerm = searchTermPassed;
         boolean validAutomaker = false;
         String[] automaker = new String[6];
         Vehicle[] userSearchResultArray = new Vehicle[3];
 
         while (!validAutomaker) {
-            userSearchTerm = sc.nextLine();
-
             int newArraySize = 0;
 
             //Loop to determine size of new array
@@ -40,8 +37,9 @@ public class VehicleService {
                 }
             }
             if (!validAutomaker) {
-                System.out.println("It seems you have entered a automaker not found in our database. Please try again:");
+                System.out.println("What Automaker's vehicles are you searching for?");
                 System.out.println("** tip: Try capitalizing only the first letter if you spell out the automaker name");
+                userSearchTerm = sc.nextLine();
             }
         }
 
@@ -66,17 +64,15 @@ public class VehicleService {
         return userSearchResultArray;
 }
 
-    public Vehicle searchByModel(Vehicle[] vehicles) {
+    public Vehicle searchByModel(Vehicle[] vehicles, String searchModel) {
         Scanner sc = new Scanner(System.in);
         CarsMenu carsMenu = new CarsMenu();
-        String userSearchTerm;
+        String userSearchTerm = searchModel;
         boolean validModel = false;
         Vehicle vehicleSelection = null;
 
 
         while (!validModel) {
-            System.out.println("What model car are you searching for? ");
-            userSearchTerm = sc.nextLine();
 
             for (Vehicle vehicle : vehicles) {
                 if (vehicle.getModel().equals(userSearchTerm)) {
@@ -84,8 +80,11 @@ public class VehicleService {
                     vehicleSelection = vehicle;
                 }
             }
-            System.out.println("It appears you have not entered a valid model.");
-            System.out.println("** tip: Try to only capitalize the first letter");
+            if (!validModel) {
+                System.out.println("What model are you looking for?");
+                System.out.println("** tip: Try to only capitalize the first letter");
+                userSearchTerm = sc.nextLine();
+            }
         }
         return vehicleSelection;
     }
@@ -103,13 +102,58 @@ public class VehicleService {
         newVehicleArray[sizeOfCurrentVehicleArray] = newVehicle;
         vehicleRepository.vehicleArray = newVehicleArray;
         System.out.println("Thank you for registering this new vehicle in our database...");
+        System.out.println("-------------------------------------------------------------");
         System.out.println("Here is the updated list for the vehicles made by " + newVehicle.automaker.getName() + ":");
         System.out.println("-------------------------------------------------------------");
+    }
 
+    public void updateVehicle(Vehicle currentVehicle, Vehicle replacementVehicle) {
+
+        int vehicleArrayPosition = 100;
+
+        for (int i = 0; i < vehicleRepository.vehicleArray.length; i++) {
+            if (vehicleRepository.vehicleArray[i].getModel().equals(currentVehicle.getModel())) {
+                vehicleArrayPosition = i;
+            }
+        }
+
+        vehicleRepository.vehicleArray[vehicleArrayPosition] = replacementVehicle;
 
     }
 
-    public void updateVehicle() {
+    public void deleteVehicleByModel (String modelToDelete) {
+        int vehicleArrayPosition = 100;
+        Vehicle[] updatedArray = new Vehicle[1];
+        int newArrayInsertionPosition = 0;
+        boolean modelIsNotInRepository = true;
+
+        for (int i = 0; i < vehicleRepository.vehicleArray.length; i++) {
+            if (vehicleRepository.vehicleArray[i].getModel().equals(modelToDelete)) {
+                vehicleArrayPosition = i;
+                modelIsNotInRepository = false;
+                updatedArray = new Vehicle[vehicleRepository.vehicleArray.length - 1];
+            }
+        }
+
+        for (int i = 0; i < vehicleRepository.vehicleArray.length; i++) {
+            if (!(vehicleRepository.vehicleArray[i].getModel().equals(modelToDelete))) {
+                updatedArray[newArrayInsertionPosition] = vehicleRepository.vehicleArray[i];
+                newArrayInsertionPosition ++;
+            }
+
+        }
+
+        System.out.println(vehicleRepository.vehicleArray.length);
+        System.out.println(updatedArray.length);
+
+        vehicleRepository.vehicleArray = updatedArray;
+
+        if (modelIsNotInRepository == true) {
+            System.out.println("------------------------------------------------------------------------------");
+            System.out.println("It appears that the model you want to delete is not in the repository");
+            System.out.println("------------------------------------------------------------------------------");
+        }
+
 
     }
 }
