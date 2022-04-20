@@ -2,6 +2,8 @@ package caleb.javaoneforallchallenges.checkpoint3.cars.test;
 
 import caleb.javaoneforallchallenges.checkpoint3.cars.domain.Vehicle;
 import caleb.javaoneforallchallenges.checkpoint3.cars.domain.VehicleService;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Application {
@@ -13,16 +15,23 @@ public class Application {
         while (!exitProgram) {
 
             int userMenuChoice = 10;
-            while (userMenuChoice < 0 || userMenuChoice > 5) {
+            while (userMenuChoice < 0 || userMenuChoice > 5 ) {
                 vehicleService.printCarMenu();
-                userMenuChoice = sc.nextInt();
+                try {
+                    userMenuChoice = sc.nextInt();
+                } catch (InputMismatchException e) {
+                    sc.next();
+                }
+
             }
             if (userMenuChoice == 1) {
                 vehicleService.searchByAutomaker(vehicleService.userInput());
             }
             if (userMenuChoice == 2) {
                 Vehicle foundModel = vehicleService.searchByModel(vehicleService.userInput());
-                foundModel.prettyPrint();
+                if (foundModel != null) {
+                    foundModel.prettyPrint();
+                }
             }
             if (userMenuChoice == 3) {
                 vehicleService.addNewVehicle();

@@ -16,6 +16,11 @@ public class VehicleService {
             }
         }
 
+        if (foundVehiclesFromAutomaker[0] == null) {
+            System.out.println("Sorry we could not find any vehicles from that automaker");
+            return;
+        }
+
         System.out.println("The models available for the automaker " + foundVehiclesFromAutomaker[0].automaker.getName() + " are: ");
         for (Vehicle vehicle : foundVehiclesFromAutomaker) {
             if (vehicle != null) {
@@ -301,7 +306,7 @@ public class VehicleService {
     }
 
     public String userInput() {
-        System.out.println("Please enter a term to search for: ");
+        System.out.println("Please enter a search term: ");
         Scanner scanner = new Scanner(System.in);
         String userSearch = scanner.nextLine();
         return (userSearch);
