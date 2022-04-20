@@ -1,4 +1,4 @@
-package caleb.javaoneforallchallenges.checkpoint2.cars.domain;
+package caleb.javaoneforallchallenges.checkpoint3.cars.domain;
 
 import java.util.Scanner;
 

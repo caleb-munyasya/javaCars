@@ -1,7 +1,7 @@
-package caleb.javaoneforallchallenges.checkpoint2.cars.test;
+package caleb.javaoneforallchallenges.checkpoint3.cars.test;
 
-import caleb.javaoneforallchallenges.checkpoint2.cars.domain.Vehicle;
-import caleb.javaoneforallchallenges.checkpoint2.cars.domain.VehicleService;
+import caleb.javaoneforallchallenges.checkpoint3.cars.domain.Vehicle;
+import caleb.javaoneforallchallenges.checkpoint3.cars.domain.VehicleService;
 import java.util.Scanner;
 
 public class Application {
