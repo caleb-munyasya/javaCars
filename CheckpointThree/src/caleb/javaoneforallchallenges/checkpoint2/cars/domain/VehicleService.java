@@ -326,22 +326,5 @@ public class VehicleService {
         System.out.println(mainCarMenu);
 
     }
-
-    public boolean returnToMainMenu () {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Press 1 to return to main menu or 0 to exit the program");
-
-        int returnToMainMenu = 2;
-        while (returnToMainMenu != 0 && returnToMainMenu != 1) {
-            returnToMainMenu = sc.nextInt();
-
-            if (returnToMainMenu == 0) {
-                return false;
-            }
-
-            System.out.println("Please enter a valid choice. Press 1 to return to main menu or 0 to exit the program : ");
-        }
-        return true;
-    }
 }
 
