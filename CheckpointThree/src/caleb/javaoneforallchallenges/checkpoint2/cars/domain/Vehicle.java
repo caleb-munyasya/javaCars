@@ -1,6 +1,6 @@
 package caleb.javaoneforallchallenges.checkpoint2.cars.domain;
 
-public class Vehicle {
+public abstract class Vehicle implements VehicleInterface{
     private String model;
     private String color;
     private int year;
@@ -19,8 +19,9 @@ public class Vehicle {
         System.out.println("Below are this vehicle's attributes:");
         System.out.println("The model is: " + getModel());
         System.out.println("The color of this vehicle is: "+ getColor());
-        System.out.println("This car was built in the year: " + getYear());
-        System.out.println("This automaker for this model is: " + automaker.getName());
+        System.out.println("This vehicle was built in the year: " + getYear());
+        System.out.println("The automaker for this model is: " + automaker.getName());
+        System.out.println("This vehicle is a " + getVehicleType());
         System.out.println("---------------------------------------");
         System.out.println("---------------------------------------");
     }

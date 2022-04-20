@@ -23,26 +23,26 @@ public class VehicleRepository {
         automakerArray = automakerObjects;
 
         //populating vehicles objects
-        Vehicle[] vehicleObjects = new Vehicle[18];
+        Vehicle[] vehicleObjects = new Car[18];
         int vehicleObjectCounter = 0;
         for (int i = 0; i < modelList.length; i++) {
             if (i>=0 && i<3) {
-                vehicleObjects[i] = new Vehicle (modelList[i], "black", 2022, automakerObjects[0]);
+                vehicleObjects[i] = new Car (modelList[i], "black", 2022, automakerObjects[0]);
             }
             if (i>=3 && i<6) {
-                vehicleObjects[i] = new Vehicle (modelList[i], "black", 2022, automakerObjects[1]);
+                vehicleObjects[i] = new Car (modelList[i], "black", 2022, automakerObjects[1]);
             }
             if (i>=6 && i<9) {
-                vehicleObjects[i] = new Vehicle (modelList[i], "black", 2022, automakerObjects[2]);
+                vehicleObjects[i] = new Car (modelList[i], "black", 2022, automakerObjects[2]);
             }
             if (i>=9 && i<12) {
-                vehicleObjects[i] = new Vehicle (modelList[i], "black", 2022, automakerObjects[3]);
+                vehicleObjects[i] = new Car (modelList[i], "black", 2022, automakerObjects[3]);
             }
             if (i>=12 && i<15) {
-                vehicleObjects[i] = new Vehicle (modelList[i], "black", 2022, automakerObjects[4]);
+                vehicleObjects[i] = new Car (modelList[i], "black", 2022, automakerObjects[4]);
             }
             if (i>=15 && i<18) {
-                vehicleObjects[i] = new Vehicle (modelList[i], "black", 2022, automakerObjects[5]);
+                vehicleObjects[i] = new Car (modelList[i], "black", 2022, automakerObjects[5]);
             }
         }
         return vehicleObjects;

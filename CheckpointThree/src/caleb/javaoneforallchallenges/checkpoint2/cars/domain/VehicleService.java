@@ -33,24 +33,6 @@ public class VehicleService {
         return null;
     }
 
-    public void addVehicle(Vehicle newVehicle) {
-
-
-        //Replacing current Vehicle Array with an updated one which includes the new vehicle
-        int sizeOfCurrentVehicleArray = vehicleRepository.vehicleArray.length;
-        Vehicle[] newVehicleArray = new Vehicle[vehicleRepository.vehicleArray.length + 1];
-
-        for (int i = 0; i < vehicleRepository.vehicleArray.length; i++) {
-            newVehicleArray[i] = vehicleRepository.vehicleArray[i];
-        }
-        newVehicleArray[sizeOfCurrentVehicleArray] = newVehicle;
-        vehicleRepository.vehicleArray = newVehicleArray;
-        System.out.println("Thank you for registering this new vehicle in our database...");
-        System.out.println("-------------------------------------------------------------");
-        System.out.println("Here is the updated list for the vehicles made by " + newVehicle.automaker.getName() + ":");
-        System.out.println("-------------------------------------------------------------");
-    }
-
     public void updateVehicle(Vehicle currentVehicle, Vehicle replacementVehicle) {
 
         int vehicleArrayPosition = 100;
@@ -67,7 +49,7 @@ public class VehicleService {
 
     public void deleteVehicleByModel() {
         Scanner sc6 = new Scanner(System.in);
-        System.out.println("What is the model of the vehicle you would like to remove from the repository?");
+        System.out.println("Please (re)enter the model of the vehicle you would like to remove from the repository?");
         String modelToDelete = sc6.nextLine();
         int vehicleArrayPosition = 100;
         Vehicle[] updatedArray = new Vehicle[1];
@@ -171,7 +153,7 @@ public class VehicleService {
     public void addNewVehicle() {
         Scanner sc3 = new Scanner(System.in);
 
-        System.out.println("You are about to add a new vehicle to the database.");
+        System.out.println("You are about to add a new Vehicle to the database.");
         String newModel = vehicleIsUnique();
 
         System.out.println("Please enter the color of the " + newModel + ": ");
@@ -186,32 +168,85 @@ public class VehicleService {
         Automaker newAutomaker = checkAutomaker();
 
         //Adding new Vehicle to the Repository
-        Vehicle newVehicle = new Vehicle(newModel, newColor, newYear, newAutomaker);
-        addVehicle(newVehicle);
+        int vehicleType = 0;
+        Vehicle newVehicle = new Car(newModel, newColor, newYear, newAutomaker);
+        Scanner vehicleTypeInput = new Scanner(System.in);
 
+        while (vehicleType < 1 || vehicleType > 6) {
+        System.out.println("What type of vehicle is this?");
+        System.out.println("Choose one of the below options: ");
+        System.out.println("1 - Car");
+        System.out.println("2 - Motorcycle");
+        System.out.println("3 - Van");
+        System.out.println("4 - Truck");
+        System.out.println("5 - Pickup");
+        System.out.println("6 - Others");
+
+        vehicleType = vehicleTypeInput.nextInt();
+            if (vehicleType == 1) {
+                newVehicle = new Car(newModel, newColor, newYear, newAutomaker);
+            }
+            if (vehicleType == 2) {
+                newVehicle = new Motorcycle(newModel, newColor, newYear, newAutomaker);
+            }
+            if (vehicleType == 3) {
+                newVehicle = new Van(newModel, newColor, newYear, newAutomaker);
+            }
+            if (vehicleType == 4) {
+                newVehicle = new Truck(newModel, newColor, newYear, newAutomaker);
+            }
+            if (vehicleType == 5) {
+                newVehicle = new Pickup(newModel, newColor, newYear, newAutomaker);
+            }
+            if (vehicleType == 6) {
+                newVehicle = new Others(newModel, newColor, newYear, newAutomaker);
+            }
+        }
+        addVehicle(newVehicle);
         //Printing updated list of Automaker's model
         searchByAutomaker(newVehicle.automaker.getName());
+    }
+
+    public void addVehicle(Vehicle newVehicle) {
+
+
+        //Replacing current Vehicle Array with an updated one which includes the new Vehicle
+        int sizeOfCurrentVehicleArray = vehicleRepository.vehicleArray.length;
+        Vehicle[] newVehicleArray = new Vehicle[vehicleRepository.vehicleArray.length + 1];
+
+        for (int i = 0; i < vehicleRepository.vehicleArray.length; i++) {
+            newVehicleArray[i] = vehicleRepository.vehicleArray[i];
+        }
+        newVehicleArray[sizeOfCurrentVehicleArray] = newVehicle;
+        vehicleRepository.vehicleArray = newVehicleArray;
+        System.out.println("Thank you for registering this new Vehicle in our database...");
+        System.out.println("-------------------------------------------------------------");
+        System.out.println("Here is the updated list for the vehicles made by " + newVehicle.automaker.getName() + ":");
+        System.out.println("-------------------------------------------------------------");
     }
 
     public void updateVehicle() {
         Scanner sc4 = new Scanner(System.in);
         Scanner sc5 = new Scanner(System.in);
-        String modelSearch = userInput();
+        System.out.println("Please enter a model to search for: ");
+        Scanner scanner = new Scanner(System.in);
+        String modelSearch = scanner.nextLine();
         Vehicle vehicleSelection = searchByModel(modelSearch);
         vehicleSelection.prettyPrint();
-        Vehicle updateVehicle = new Vehicle(vehicleSelection.getModel(), vehicleSelection.getColor(),
+        Vehicle updateVehicle = new Car(vehicleSelection.getModel(), vehicleSelection.getColor(),
                 vehicleSelection.getYear(), vehicleSelection.automaker);
 
         String updatedModel = updateVehicle.getModel();
 
         //Allowing selection for which vehicle attribute to update
-        int featureToUpdate = 100;
-        while (!(featureToUpdate > 0 && featureToUpdate < 5)) {
+        int featureToUpdate = 0;
+        while (featureToUpdate < 1 || featureToUpdate > 5) {
             System.out.println("Please select attribute would you like to update:");
             System.out.println("1 - Model");
             System.out.println("2 - Color");
             System.out.println("3 - Year");
             System.out.println("4 - Automaker");
+            System.out.println("5 - Vehicle Type");
 
             featureToUpdate = sc4.nextInt();
 
@@ -223,27 +258,43 @@ public class VehicleService {
             String newModel = vehicleIsUnique();
             updatedModel = newModel;
             updateVehicle.setModel(newModel);
+            updateVehicle(vehicleSelection, updateVehicle);
         }
         if (featureToUpdate == 2) {
             System.out.println("-------------------------------------------------------------");
             System.out.println("Please enter the new color: ");
             String newColor = sc5.nextLine();
             updateVehicle.setColor(newColor);
+            updateVehicle(vehicleSelection, updateVehicle);
         }
         if (featureToUpdate == 3) {
             System.out.println("-------------------------------------------------------------");
             System.out.println("Please enter the new Manufacturing year");
             int newYear = sc5.nextInt();
             updateVehicle.setYear(newYear);
+            updateVehicle(vehicleSelection, updateVehicle);
         }
         if (featureToUpdate == 4) {
             System.out.println("-------------------------------------------------------------");
             Automaker newAutomaker = checkAutomaker();
             updateVehicle.automaker = newAutomaker;
+            updateVehicle(vehicleSelection, updateVehicle);
         }
+        if (featureToUpdate == 5) {
+            int proceed = 3;
+            Scanner proceedCheck = new Scanner(System.in);
+            while (proceed != 0 && proceed != 1) {
+            System.out.println("If you would like to update the Vehicle type, you will have to re-enter all features.");
+            System.out.println("Press 1 to delete " + updateVehicle.getModel() + " or press 0 to return to the main menu");
+            proceed = proceedCheck.nextInt();
+            }
 
-        updateVehicle(vehicleSelection, updateVehicle);
+            if (proceed == 1) {
+                deleteVehicleByModel();
+                addNewVehicle();
+            }
 
+        }
         System.out.println("Update successful... ");
 
         searchByModel(updatedModel);
