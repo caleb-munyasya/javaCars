@@ -1,7 +1,7 @@
-package caleb.javaoneforallchallenges.checkpoint3.cars.test;
+package caleb.javaoneforallchallenges.checkpoint4.test;
 
-import caleb.javaoneforallchallenges.checkpoint3.cars.domain.Vehicle;
-import caleb.javaoneforallchallenges.checkpoint3.cars.domain.VehicleService;
+import caleb.javaoneforallchallenges.checkpoint4.domain.Vehicle;
+import caleb.javaoneforallchallenges.checkpoint4.domain.VehicleService;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

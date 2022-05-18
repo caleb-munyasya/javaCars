@@ -1,4 +1,4 @@
-package caleb.javaoneforallchallenges.checkpoint3.cars.domain;
+package caleb.javaoneforallchallenges.checkpoint4.domain;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -36,7 +36,15 @@ public abstract class Vehicle implements VehicleInterface{
         int hour = randomTime.getHour();
         int minute = randomTime.getMinute();
         int seconds = randomTime.getSecond();
-        this.reportFormCreatedAt = shortMonth + " " + dayOfTheMonth + ", " + year + ", " + hour + ":" + minute + ":" + seconds;
+        String lessThan10seconds = "";
+        String lessThan10minutes = "";
+        if (minute < 10) {
+            lessThan10minutes = "0";
+        }
+        if (seconds < 10) {
+            lessThan10seconds = "0";
+        }
+        this.reportFormCreatedAt = shortMonth + " " + dayOfTheMonth + ", " + year + ", " + hour + ":" + lessThan10minutes + minute + ":" + lessThan10seconds + seconds;
     }
 
     public void prettyPrint(){

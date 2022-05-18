@@ -1,4 +1,4 @@
-package caleb.javaoneforallchallenges.checkpoint3.cars.domain;
+package caleb.javaoneforallchallenges.checkpoint4.domain;
 
 public class Pickup extends Vehicle{
 
