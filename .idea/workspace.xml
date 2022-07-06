@@ -4,27 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3dcd2c47-4865-4c44-8515-e1e7d7614b3f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CheckpointThree/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Checkpoint3/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CheckpointThree/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Checkpoint3/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CheckpointThree/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Checkpoint3/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CheckpointThree/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Checkpoint3/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CheckpointThree/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/Automaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkpoint3/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/Automaker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CheckpointThree/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkpoint3/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/Car.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CheckpointThree/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/CarsMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkpoint3/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/CarsMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CheckpointThree/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/Motorcycle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkpoint3/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/Motorcycle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CheckpointThree/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/Others.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkpoint3/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/Others.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CheckpointThree/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/Pickup.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkpoint3/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/Pickup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CheckpointThree/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/Truck.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkpoint3/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/Truck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CheckpointThree/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/Van.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkpoint3/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/Van.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CheckpointThree/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/Vehicle.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkpoint3/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/Vehicle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CheckpointThree/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/VehicleInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkpoint3/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/VehicleInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CheckpointThree/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/VehicleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkpoint3/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/VehicleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CheckpointThree/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/VehicleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkpoint3/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/VehicleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CheckpointThree/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/VehicleTypeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkpoint3/src/caleb/javaoneforallchallenges/checkpoint3/cars/domain/VehicleTypeEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CheckpointThree/src/caleb/javaoneforallchallenges/checkpoint3/cars/test/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkpoint3/src/caleb/javaoneforallchallenges/checkpoint3/cars/test/Application.java" afterDir="false" />
-    </list>
+    <list default="true" id="3dcd2c47-4865-4c44-8515-e1e7d7614b3f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
