@@ -1,0 +1,13 @@
+
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(œê­ÿþÿÿÿÿ
+Q
+java:S1854"<Remove this useless assignment to local variable "producer".(º‚ÜE
+B
+java:S1481"-Remove this unused "producer" local variable.(º‚ÜE
+Q	java:S125"<This block of commented-out lines of code should be removed.(ªÊÿ¬
+N
+java:S1128"8Remove this unused import 'JDBC.conn.ConnectionFactory'.(·Ê”ä
+Z
+java:S1128"?Remove this unused import 'JDBC.repository.ProducerRepository'.(€±÷Ãþÿÿÿÿ
+F
+java:S1128	"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ

@@ -32,7 +32,11 @@ public class Application {
                 vehicleService.addNewVehicle();
             }
             if (userMenuChoice == 4) {
-                vehicleService.updateVehicle();
+                try {
+                    vehicleService.updateVehicle();
+                } catch (NullPointerException e) {
+                    System.out.println("Sorry, could not update this model as it was not found in the database");
+                }
             }
             if (userMenuChoice == 5) {
                 vehicleService.deleteVehicleByModel(vehicleService.userInput());

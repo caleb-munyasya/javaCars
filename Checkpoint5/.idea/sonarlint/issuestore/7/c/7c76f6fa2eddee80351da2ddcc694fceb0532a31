@@ -1,21 +1,0 @@
-
-w
-java:S1104"\Make vehicleArrayList a static final constant or non-public and provide accessors if needed.(²” ¨øÿÿÿÿ
-p
-java:S1104	"ZMake automakerArray a static final constant or non-public and provide accessors if needed.(´Ş•¤
-m
-java:S3776"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(ƒšÃ˜ûÿÿÿÿ
-T
-java:S1481 "9Remove this unused "vehicleObjectCounter" local variable.(‘ş¢Ğÿÿÿÿÿ
-4
-java:S2119#"Save and re-use this "Random".(Ü™šÂ
-;
-java:S2119&"Save and re-use this "Random".(µ˜ˆÉ8‚ÃÔ0
-@
-java:S2119)"Save and re-use this "Random".(œ•Àşÿÿÿÿ8¯×Ô0
-;
-java:S2119,"Save and re-use this "Random".(Ä©Ø°8‚ñÔ0
-@
-java:S2119/"Save and re-use this "Random".(ê‰Ååùÿÿÿÿ8ÍŒÕ0
-;
-java:S21192"Save and re-use this "Random".(šÈ®ÿ8ê¥Õ0

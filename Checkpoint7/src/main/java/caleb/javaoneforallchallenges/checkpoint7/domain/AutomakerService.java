@@ -1,5 +1,7 @@
 package caleb.javaoneforallchallenges.checkpoint7.domain;
 
+import java.util.List;
+
 public class AutomakerService {
     AutomakerRepository automakerRepository = new AutomakerRepository();
 
@@ -8,5 +10,8 @@ public class AutomakerService {
     }
     public void Save(Integer automakerID, String automakerName ) {
         automakerRepository.save(automakerID,automakerName);
+    }
+    public List<Automaker> findAllAutomakers () {
+        return automakerRepository.findAll();
     }
 }

@@ -1,12 +1,7 @@
 package caleb.javaoneforallchallenges.checkpoint7.domain;
 
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.TextStyle;
 import java.util.Locale;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class Vehicle implements VehicleInterface{
@@ -18,7 +13,7 @@ public abstract class Vehicle implements VehicleInterface{
     private Integer id;
 
 
-    public Vehicle (String model, String color, int year, Automaker automaker) {
+    protected Vehicle (String model, String color, int year, Automaker automaker) {
         this.model = model;
         this.color = color;
         this.year = year;

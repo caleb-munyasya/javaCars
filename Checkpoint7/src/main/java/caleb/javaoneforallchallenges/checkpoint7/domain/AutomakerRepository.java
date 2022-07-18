@@ -2,23 +2,23 @@ package caleb.javaoneforallchallenges.checkpoint7.domain;
 
 import caleb.javaoneforallchallenges.checkpoint7.conn.ConnectionFactory;
 
-import javax.swing.plaf.nimbus.State;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AutomakerRepository {
-    public Automaker findByName(String AutomakerName){
-        String sql = "SELECT * FROM auto_dealer.automaker WHERE automaker = '%s'".formatted(AutomakerName);
+    public Automaker findByName(String automakerName){
+        String sql = "SELECT * FROM auto_dealer.automaker WHERE automaker = '%s'".formatted(automakerName);
         try (
             Connection conn = ConnectionFactory.getConnection();
             Statement stmt = conn.createStatement()){
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                Automaker automaker = new Automaker(rs.getInt("automakerID")
+                return new Automaker(rs.getInt("automakerID")
                         ,(rs.getString("automaker")));
-                return automaker;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -36,5 +36,23 @@ public class AutomakerRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Automaker> findAll () {
+        String sql = "SELECT * FROM auto_dealer.automaker;";
+        List<Automaker> allAutomakers = new ArrayList<>();
+        try (
+                Connection conn = ConnectionFactory.getConnection();
+                Statement stmt = conn.createStatement()){
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Automaker automaker = new Automaker(rs.getInt("automakerID")
+                        ,(rs.getString("automaker")));
+                allAutomakers.add(automaker);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allAutomakers;
     }
 }
