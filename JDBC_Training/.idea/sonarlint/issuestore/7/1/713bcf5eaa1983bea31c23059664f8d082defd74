@@ -1,6 +1,0 @@
-
-t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Ö²ÃÛùÿÿÿÿ
-P
-java:S1118":Add a private constructor to hide the implicit public one.(ü½õˆ
-g
-java:S3457&"Q%n should be used in place of \n to produce the platform-specific line separator.(Íœ…Ú
