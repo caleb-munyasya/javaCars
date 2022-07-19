@@ -1,4 +1,4 @@
-version: '2.4'
+version: '3'
 services:
   db:
     image: mysql
@@ -6,8 +6,11 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - "3308:3306"
+      - "3311:3306"
     volumes:
       - checkpoint7_data:/var/lib/mysql
+      - "./scripts/schema.sql:/docker-entrypoint-initdb.d/1.sql"
 volumes:
   checkpoint7_data:
+
+
