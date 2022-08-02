@@ -4,22 +4,24 @@ import java.time.Instant;
 import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
 
-public abstract class Vehicle implements VehicleInterface{
+public class Vehicle implements VehicleInterface{
     private String model;
     private String color;
     private int year;
     protected Automaker automaker;
     protected String createdAt;
     private Integer id;
+    protected VehicleType vehicleType;
 
 
-    protected Vehicle (String model, String color, int year, Automaker automaker) {
+    protected Vehicle (String model, String color, int year, Automaker automaker, VehicleType vehicleType) {
         this.model = model;
         this.color = color;
         this.year = year;
         this.automaker = automaker;
         this.id = ThreadLocalRandom.current().nextInt(0,100000000);
         this.createdAt = Instant.ofEpochSecond(ThreadLocalRandom.current().nextInt(1531485427,1657715827)).toString();
+        this.vehicleType = vehicleType;
     }
 
     @Override
@@ -32,7 +34,7 @@ public abstract class Vehicle implements VehicleInterface{
                 "The color of this vehicle is: "+ getColor() + "\n" +
                 "This vehicle was built in the year: " + getYear() + "\n" +
                 "The automaker for this model is: " + automaker.getName() + "\n" +
-                "This vehicle is a: " + getVehicleType().toString().toLowerCase(Locale.ROOT) + "\n" +
+                "This vehicle is a: " + vehicleType.getVehicleType() + "\n" +
                 "This vehicle was added to the Database at: " + getCreatedAt() + "\n" +
                 "The Vehicle ID is: " + getId() ;
     }
@@ -83,7 +85,12 @@ public abstract class Vehicle implements VehicleInterface{
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setVehicleType(VehicleType vehicleType) {
+        this.vehicleType = vehicleType;
+    }
+
+    @Override
+    public VehicleType getVehicleType() {
+        return vehicleType;
     }
 }

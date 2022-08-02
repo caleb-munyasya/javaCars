@@ -13,13 +13,14 @@ public class Application {
         while (!exitProgram) {
             int userMenuChoice = 10;
             while (userMenuChoice < 0 || userMenuChoice > 6 ) {
-                vehicleService.printCarMenu();
+                vehicleService.printVehicleMenu();
                 try {
                     userMenuChoice = sc.nextInt();
                 } catch (InputMismatchException e) {
                     sc.next();
                 }
             }
+
             if (userMenuChoice == 1) {
                 vehicleService.printFoundModels(vehicleService.searchByAutomaker(vehicleService.userInput()));
             }

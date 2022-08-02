@@ -2,20 +2,17 @@ package caleb.javaoneforallchallenges.checkpoint8.domain;
 
 import caleb.javaoneforallchallenges.checkpoint8.conn.ConnectionFactory;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AutomakerRepository {
     public Automaker findByName(String automakerName){
-        String sql = "SELECT * FROM auto_dealer.automaker WHERE automaker = '%s'".formatted(automakerName);
+        String sql = "SELECT * FROM auto_dealer.automaker WHERE automaker = ?";
         try (
             Connection conn = ConnectionFactory.getConnection();
-            Statement stmt = conn.createStatement()){
-            ResultSet rs = stmt.executeQuery(sql);
+            PreparedStatement preparedStatement = createPreparedStatementFindByName(conn, sql, automakerName)){
+            ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 return new Automaker(rs.getInt("automakerID")
                         ,(rs.getString("automaker")));
@@ -27,11 +24,11 @@ public class AutomakerRepository {
     }
 
     public void save(Integer automakerID, String automakerName){
-        String sql = "INSERT INTO `auto_dealer`.`automaker` (`automakerID`, `automaker`) VALUES ('%d', '%s');".formatted(automakerID,automakerName);
+        String sql = "INSERT INTO `auto_dealer`.`automaker` (`automakerID`, `automaker`) VALUES (?, ?);";
         try (
             Connection conn = ConnectionFactory.getConnection();
-            Statement stmt = conn.createStatement()){
-            Integer rowsUpdated = stmt.executeUpdate(sql);
+            PreparedStatement preparedStatement = createPreparedStatementSave(conn, sql, automakerID, automakerName)){
+            Integer rowsUpdated = preparedStatement.executeUpdate();
             System.out.println(rowsUpdated + " row(s) have been updated with ID: " + automakerID + " and name: " + automakerName);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -54,5 +51,18 @@ public class AutomakerRepository {
             e.printStackTrace();
         }
         return allAutomakers;
+    }
+
+    public PreparedStatement createPreparedStatementSave (Connection connection, String sql, Integer AutomakerID, String automakerName) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, AutomakerID);
+        preparedStatement.setString(2, automakerName);
+        return preparedStatement;
+    }
+
+    public PreparedStatement createPreparedStatementFindByName (Connection connection, String sql, String automakerName) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, automakerName);
+        return preparedStatement;
     }
 }

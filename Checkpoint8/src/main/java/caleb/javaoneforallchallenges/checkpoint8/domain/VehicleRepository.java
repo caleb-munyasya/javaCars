@@ -2,6 +2,7 @@ package caleb.javaoneforallchallenges.checkpoint8.domain;
 
 import caleb.javaoneforallchallenges.checkpoint8.conn.ConnectionFactory;
 import com.mysql.cj.x.protobuf.MysqlxPrepare;
+import org.w3c.dom.ls.LSOutput;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class VehicleRepository {
     protected List<Automaker> automakerArray;
 
     public List<Vehicle> findByAutomaker(String automakerName) {
-        String sql = "SELECT * FROM vehicle v LEFT JOIN automaker a ON a.automakerID = v.automakerID WHERE Automaker = ?;";
+        String sql = "SELECT * FROM vehicle LEFT JOIN automaker ON automaker.automakerID = vehicle.automakerID LEFT JOIN vehicleType ON vehicle.vehicleTypeID = vehicleType.vehicleTypeID WHERE Automaker = ?;";
         List<Vehicle> vehiclesFound = new ArrayList<>();
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement preparedStatement = createPreparedStatementFindByAutomaker(conn, sql, automakerName);
@@ -21,8 +22,9 @@ public class VehicleRepository {
             while (rs.next()) {
                 Automaker currentAutomaker = new Automaker(rs.getInt("automakerID"),
                         (rs.getString("Automaker")));
-                Car currentVehicle = new Car(rs.getString("model"),
-                        rs.getString("color"), rs.getInt("year"), currentAutomaker);
+                VehicleType vehicleType = new VehicleType(rs.getInt("vehicleTypeID"), rs.getString("vehicleType"));
+                Vehicle currentVehicle = new Vehicle(rs.getString("model"),
+                        rs.getString("color"), rs.getInt("year"), currentAutomaker, vehicleType);
                 vehiclesFound.add(currentVehicle);
             }
         } catch (SQLException e) {
@@ -32,7 +34,7 @@ public class VehicleRepository {
     }
 
     public List<Vehicle> findAll() {
-        String sql = "SELECT * FROM vehicle v LEFT JOIN automaker a ON a.automakerID = v.automakerID";
+        String sql = "SELECT * FROM vehicle LEFT JOIN automaker ON automaker.automakerID = vehicle.automakerID LEFT JOIN vehicleType ON vehicle.vehicleTypeID = vehicleType.vehicleTypeID";
         List<Vehicle> vehiclesFound = new ArrayList<>();
         try (Connection conn = ConnectionFactory.getConnection();
              Statement stmt = conn.createStatement();
@@ -40,8 +42,9 @@ public class VehicleRepository {
             while (rs.next()) {
                 Automaker currentAutomaker = new Automaker(rs.getInt("automakerID"),
                         (rs.getString("Automaker")));
-                Car currentVehicle = new Car(rs.getString("model"),
-                        rs.getString("color"), rs.getInt("year"), currentAutomaker);
+                VehicleType vehicleType = new VehicleType(rs.getInt("vehicleTypeID"), rs.getString("vehicleType"));
+                Vehicle currentVehicle = new Vehicle(rs.getString("model"),
+                        rs.getString("color"), rs.getInt("year"), currentAutomaker, vehicleType);
                 vehiclesFound.add(currentVehicle);
             }
         } catch (SQLException e) {
@@ -51,15 +54,17 @@ public class VehicleRepository {
     }
 
     public Vehicle findByModel(String modelName) {
-        String sql = "SELECT * FROM vehicle v LEFT JOIN automaker a ON a.automakerID = v.automakerID WHERE model = ?;";
+        String sql = "SELECT * FROM vehicle LEFT JOIN automaker ON automaker.automakerID = vehicle.automakerID LEFT JOIN vehicleType ON vehicle.vehicleTypeID = vehicleType.vehicleTypeID WHERE model = ?;";
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement preparedStatement = createPreparedStatementFindByModel(conn, sql, modelName);
              ResultSet rs = preparedStatement.executeQuery()) {
             while (rs.next()) {
                 Automaker currentAutomaker = new Automaker(rs.getInt("automakerID"),
                         (rs.getString("Automaker")));
-                return new Car(rs.getString("model"),
-                        rs.getString("color"), rs.getInt("year"), currentAutomaker);
+                VehicleType vehicleType = new VehicleType(rs.getInt("vehicleTypeID"), rs.getString("vehicleType"));
+
+                return new Vehicle(rs.getString("model"),
+                        rs.getString("color"), rs.getInt("year"), currentAutomaker, vehicleType);
             }
         } catch (SQLException e) {
             System.out.println("Something went wrong trying to find " + modelName);
@@ -85,11 +90,11 @@ public class VehicleRepository {
         }
 
         String sql = ("UPDATE `auto_dealer`.`vehicle` SET `model` = ?, `automakerID` = ?, `color` = ?, " +
-                "`year` = ? WHERE (`model` = ?);");
+                "`year` = ?, `vehicleTypeID` = ? WHERE (`model` = ?);");
         try (
                 Connection conn = ConnectionFactory.getConnection();
                 PreparedStatement preparedStatement = createPreparedStatementReplaceVehicle(conn, sql, replacementVehicle.getModel(), replacementVehicle.automaker.getId(),
-                        replacementVehicle.getColor(), replacementVehicle.getYear(), vehicleToUpdate.getModel())) {
+                        replacementVehicle.getColor(), replacementVehicle.getYear(), replacementVehicle.vehicleType.getId(), vehicleToUpdate.getModel())) {
             int rowsAffected = preparedStatement.executeUpdate();
             System.out.println(rowsAffected + " rows have been affected.");
         } catch (SQLException e) {
@@ -107,11 +112,11 @@ public class VehicleRepository {
     public void saveToDatabase(Vehicle newVehicle) {
         System.out.println(newVehicle.toString());
         String sql = ("INSERT INTO `auto_dealer`.`vehicle` (`vehicleID`, `automakerID`, `model`," +
-                " `color`, `year`, `createdAt`, `vehicleType`) VALUES (?,?,?,?,?,?,?);");
+                " `color`, `year`, `createdAt`, `vehicleTypeID`) VALUES (?,?,?,?,?,?,?);");
         try (
                 Connection conn = ConnectionFactory.getConnection();
                 PreparedStatement preparedStatement = createPreparedStatementSaveToDatabase(conn, sql, newVehicle.getId(), newVehicle.automaker.getId(),
-                        newVehicle.getModel(), newVehicle.getColor(), newVehicle.getYear(), newVehicle.getCreatedAt(), newVehicle.getVehicleType().toString())) {
+                        newVehicle.getModel(), newVehicle.getColor(), newVehicle.getYear(), newVehicle.getCreatedAt(), newVehicle.vehicleType.getId())) {
             int rowsAffected = preparedStatement.executeUpdate();
             System.out.println(rowsAffected + " row(s) have been affected.");
             newVehicle.toString();
@@ -139,18 +144,19 @@ public class VehicleRepository {
     }
 
     private static PreparedStatement createPreparedStatementReplaceVehicle(Connection connection, String sql, String replacementModel,
-                                                                           Integer automakerID, String Color, Integer year, String currentModel) throws SQLException {
+                                                                           Integer automakerID, String Color, Integer year, Integer vehicleTypeID, String currentModel) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, replacementModel);
         preparedStatement.setInt(2, automakerID);
         preparedStatement.setString(3, Color);
         preparedStatement.setInt(4, year);
-        preparedStatement.setString(5, currentModel);
+        preparedStatement.setInt(5, vehicleTypeID);
+        preparedStatement.setString(6, currentModel);
         return preparedStatement;
     }
 
     private static PreparedStatement createPreparedStatementSaveToDatabase(Connection connection, String sql, Integer modelID, Integer automakerID, String model,
-                                                                           String Color, Integer year, String createdAt, String vehicleType) throws SQLException {
+                                                                           String Color, Integer year, String createdAt, Integer vehicleType) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, modelID);
         preparedStatement.setInt(2, automakerID);
@@ -158,7 +164,7 @@ public class VehicleRepository {
         preparedStatement.setString(4, Color);
         preparedStatement.setInt(5, year);
         preparedStatement.setString(6, createdAt);
-        preparedStatement.setString(7, vehicleType);
+        preparedStatement.setInt(7, vehicleType);
         return preparedStatement;
     }
 }
