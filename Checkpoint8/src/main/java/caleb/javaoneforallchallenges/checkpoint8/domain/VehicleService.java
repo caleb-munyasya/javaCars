@@ -1,5 +1,6 @@
 package caleb.javaoneforallchallenges.checkpoint8.domain;
 
+import javax.sound.midi.Soundbank;
 import java.sql.SQLOutput;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -122,32 +123,34 @@ public class VehicleService {
 
                 }
 
-                if (featureToUpdate == 1) {
+                if (newVehicleType == 1) {
                     System.out.println("-------------------------------------------------------------");
                     replacementVehicle.setVehicleType(vehicleTypeService.searchByName("CAR"));
+                    System.out.println(replacementVehicle.getVehicleType().getVehicleType());
+                    System.out.println(replacementVehicle.toString());
                     vehicleRepository.replaceVehicle(replacementVehicle, vehicleToUpdate);
                 }
-                if (featureToUpdate == 2) {
+                if (newVehicleType == 2) {
                     System.out.println("-------------------------------------------------------------");
                     replacementVehicle.setVehicleType(vehicleTypeService.searchByName("Pickup"));
                     vehicleRepository.replaceVehicle(replacementVehicle, vehicleToUpdate);
                 }
-                if (featureToUpdate == 3) {
+                if (newVehicleType == 3) {
                     System.out.println("-------------------------------------------------------------");
                     replacementVehicle.setVehicleType(vehicleTypeService.searchByName("Motorcycle"));
                     vehicleRepository.replaceVehicle(replacementVehicle, vehicleToUpdate);
                 }
-                if (featureToUpdate == 4) {
+                if (newVehicleType == 4) {
                     System.out.println("-------------------------------------------------------------");
                     replacementVehicle.setVehicleType(vehicleTypeService.searchByName("Van"));
                     vehicleRepository.replaceVehicle(replacementVehicle, vehicleToUpdate);
                 }
-                if (featureToUpdate == 5) {
+                if (newVehicleType == 5) {
                     System.out.println("-------------------------------------------------------------");
                     replacementVehicle.setVehicleType(vehicleTypeService.searchByName("Truck"));
                     vehicleRepository.replaceVehicle(replacementVehicle, vehicleToUpdate);
                 }
-                if (featureToUpdate == 6) {
+                if (newVehicleType == 6) {
                     System.out.println("-------------------------------------------------------------");
                     replacementVehicle.setVehicleType(vehicleTypeService.searchByName("Others"));
                     vehicleRepository.replaceVehicle(replacementVehicle, vehicleToUpdate);

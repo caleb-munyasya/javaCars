@@ -12,7 +12,7 @@ public class Application {
         boolean exitProgram = false;
         while (!exitProgram) {
             int userMenuChoice = 10;
-            while (userMenuChoice < 0 || userMenuChoice > 6 ) {
+            while (userMenuChoice < 0 || userMenuChoice > 7 ) {
                 vehicleService.printVehicleMenu();
                 try {
                     userMenuChoice = sc.nextInt();

@@ -94,7 +94,7 @@ public class VehicleRepository {
         try (
                 Connection conn = ConnectionFactory.getConnection();
                 PreparedStatement preparedStatement = createPreparedStatementReplaceVehicle(conn, sql, replacementVehicle.getModel(), replacementVehicle.automaker.getId(),
-                        replacementVehicle.getColor(), replacementVehicle.getYear(), replacementVehicle.vehicleType.getId(), vehicleToUpdate.getModel())) {
+                replacementVehicle.getColor(), replacementVehicle.getYear(), replacementVehicle.vehicleType.getId(), vehicleToUpdate.getModel())) {
             int rowsAffected = preparedStatement.executeUpdate();
             System.out.println(rowsAffected + " rows have been affected.");
         } catch (SQLException e) {
