@@ -7,14 +7,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
 import java.util.Optional;
 //@SpringBootTest
 @DataJpaTest
@@ -66,12 +64,16 @@ public class VehicleRepositoryTest {
     public void findByModel_PersistVehicle_WhenSuccessful(){
         Vehicle vehicle = vehicleCreator.createVehicle();
         Vehicle savedVehicle = this.vehicleRepository.save(vehicle);
-        Assertions.assertThat(vehicleRepository.findByModel(savedVehicle.getModel()).equals(vehicle.getModel()));
+        Assertions.assertThat(this.vehicleRepository.findByModel(savedVehicle.getModel())).isNotEmpty();
+        //I don't know why this test and the one below both fail!
     }
     @Test
     public void findByAutomakerName_PersistVehicle_WhenSuccessful(){
         Vehicle vehicle = vehicleCreator.createVehicle();
         Vehicle savedVehicle = this.vehicleRepository.save(vehicle);
-        Assertions.assertThat(vehicleRepository.findByAutomakerName(savedVehicle.getAutomaker().getName()).contains(savedVehicle));
+        String automakerName = vehicle.getModel();
+        List<Vehicle> vehicleList = this.vehicleRepository.findByAutomakerName(automakerName);
+        Assertions.assertThat(vehicleList).isNotEmpty();
+        Assertions.assertThat(vehicleList.get(0).getAutomaker().getName().equals(automakerName));
     }
 }

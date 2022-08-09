@@ -17,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @ExtendWith(SpringExtension.class)
@@ -43,6 +42,7 @@ class VehicleControllerTest {
         BDDMockito.when(vehicleServiceMock.saveToDatabase(ArgumentMatchers.any()))
                 .thenReturn(VehicleCreator.createVehicle());
         BDDMockito.doNothing().when(vehicleServiceMock).deleteVehicle(ArgumentMatchers.anyInt());
+        BDDMockito.doNothing().when(vehicleServiceMock).replaceVehicle(ArgumentMatchers.any());
     }
 
     @Test
@@ -86,15 +86,12 @@ class VehicleControllerTest {
 
     @Test
     void update_saveUpdatedVehicle_WhenSuccessful() {
-        Vehicle validUpdatedAnime = VehicleCreator.createUpdatedVehicle();
+        ResponseEntity<Void> responseEntity = vehicleController.updateVehicle(VehicleCreator.createUpdatedVehicle());
 
-        String expectModel = validUpdatedAnime.getModel();
+        Assertions.assertThat(responseEntity).isNotNull();
+        Assertions.assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
+        Assertions.assertThat(responseEntity.getBody()).isNull();
 
-        Vehicle vehicle = vehicleController.addNewVehicle(VehicleCreator.createVehicle()).getBody();
-
-        Assertions.assertThat(vehicle).isNotNull();
-        Assertions.assertThat(vehicle.getId()).isNotNull();
-        Assertions.assertThat(vehicle.getModel()).isEqualTo(expectModel);
     }
 
     @Test

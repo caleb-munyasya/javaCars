@@ -1,6 +1,5 @@
 package calebDoesJava.checkpoint8.service;
 
-import calebDoesJava.checkpoint8.domain.Automaker;
 import calebDoesJava.checkpoint8.domain.Vehicle;
 import calebDoesJava.checkpoint8.repository.VehicleRepository;
 import calebDoesJava.checkpoint8.utils.Utils;
@@ -35,7 +34,10 @@ public class VehicleService {
 
     @Transactional
     public void replaceVehicle(Vehicle vehicle) {
-        if (!findByModel(vehicle.getModel()).isEmpty()) {
+        boolean vehicleIsInDatabase = !vehicleRepository.findById(vehicle.getId()).isEmpty();
+        Optional<Vehicle> vehicleToDelete = vehicleRepository.findById(vehicle.getId());
+        if(vehicleIsInDatabase && vehicleToDelete.isPresent()) {
+            vehicleRepository.delete(vehicleToDelete.get());
             vehicleRepository.save(vehicle);
         }
     }
