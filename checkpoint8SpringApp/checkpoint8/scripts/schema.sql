@@ -24,6 +24,16 @@ CREATE TABLE `vehicle` (
   CONSTRAINT `automakerID` FOREIGN KEY (`automakerID`) REFERENCES `automaker` (`automakerID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `vehicle_sortid` FOREIGN KEY (`sortID`) REFERENCES `sort` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `web_user` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `authorities` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `username` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_sydf5vujahmtb782b5tycd0h4` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
     
 INSERT INTO `auto_dealer`.`automaker` (`automakerID`, `automaker`) VALUES ('369416', 'kia');
 INSERT INTO `auto_dealer`.`automaker` (`automakerID`, `automaker`) VALUES ('1329105', 'kawasaki');
@@ -42,6 +52,8 @@ INSERT INTO `auto_dealer`.`sort` (`id`, `sort`) VALUES ('658659321', 'TRUCK');
 INSERT INTO `auto_dealer`.`sort` (`id`, `sort`) VALUES ('757215896', 'VAN');
 INSERT INTO `auto_dealer`.`sort` (`id`, `sort`) VALUES ('858124568', 'MOTORCYCLE');
 INSERT INTO `auto_dealer`.`sort` (`id`, `sort`) VALUES ('875412569', 'CAR');
+INSERT INTO `auto_dealer`.`web_user` (`id`, `authorities`, `name`, `password`, `username`) VALUES ('1', 'ROLE_USER, ROLE_ADMIN', 'Admin admin', '$2a$10$S84BaSg4vgMO2Fx/.5tG4u3p6kXjYEtLss6V4OWjA.Gs3aHf/QAvG', 'admin1');
+INSERT INTO `auto_dealer`.`web_user` (`id`, `authorities`, `name`, `password`, `username`) VALUES ('2', 'ROLE_USER', 'User user', '$2a$10$S84BaSg4vgMO2Fx/.5tG4u3p6kXjYEtLss6V4OWjA.Gs3aHf/QAvG', 'user1');
 INSERT INTO `auto_dealer`.`vehicle` (`vehicleID`, `automakerID`, `model`, `color`, `year`, `modified`, `sortID`) VALUES ('10901306', '78221788', 'Jetta', 'purple', '2018', '2022-06-04T21:20:33Z', '875412569');
 INSERT INTO `auto_dealer`.`vehicle` (`vehicleID`, `automakerID`, `model`, `color`, `year`, `modified`, `sortID`) VALUES ('3105758', '36496215', 'Sonata', 'blue', '2016', '2021-09-16T03:44:49Z', '875412569');
 INSERT INTO `auto_dealer`.`vehicle` (`vehicleID`, `automakerID`, `model`, `color`, `year`, `modified`, `sortID`) VALUES ('32041979', '78221788', 'Golf', 'black', '2018', '2020-12-06T11:24:39Z', '875412569');
