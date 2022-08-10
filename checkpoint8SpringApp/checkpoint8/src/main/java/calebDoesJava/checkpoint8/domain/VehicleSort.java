@@ -10,6 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "sort")
+@Builder
 public class VehicleSort {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

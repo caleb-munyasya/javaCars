@@ -24,8 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf()
                 .disable()
                     .authorizeRequests()
-//                    .antMatchers("/vehicles/admin/**").hasRole("ADMIN")
-//                    .antMatchers("/vehicles/**").hasRole("USER")
+                    .antMatchers("/vehicles/admin/**").hasRole("ADMIN")
+                    .antMatchers("/vehicles/**").hasRole("USER")
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()
@@ -41,6 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         PasswordEncoder passwordEncoder = getPasswordEncoder();
+//        auth.inMemoryAuthentication().withUser("admin1")
+//                .password(passwordEncoder.encode("password"))
+//                .roles("ADMIN", "USER");
         auth.userDetailsService(webUserDetailsService)
                 .passwordEncoder(passwordEncoder);
     }

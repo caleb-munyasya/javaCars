@@ -1,6 +1,8 @@
 package calebDoesJava.checkpoint8.repository;
 
+import calebDoesJava.checkpoint8.domain.Automaker;
 import calebDoesJava.checkpoint8.domain.Vehicle;
+import calebDoesJava.checkpoint8.domain.VehicleSort;
 import calebDoesJava.checkpoint8.util.VehicleCreator;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -63,17 +65,18 @@ public class VehicleRepositoryTest {
     @Test
     public void findByModel_PersistVehicle_WhenSuccessful(){
         Vehicle vehicle = vehicleCreator.createVehicle();
+
         Vehicle savedVehicle = this.vehicleRepository.save(vehicle);
         Assertions.assertThat(this.vehicleRepository.findByModel(savedVehicle.getModel())).isNotEmpty();
-        //I don't know why this test and the one below both fail!
+
     }
     @Test
     public void findByAutomakerName_PersistVehicle_WhenSuccessful(){
         Vehicle vehicle = vehicleCreator.createVehicle();
+
         Vehicle savedVehicle = this.vehicleRepository.save(vehicle);
-        String automakerName = vehicle.getModel();
-        List<Vehicle> vehicleList = this.vehicleRepository.findByAutomakerName(automakerName);
+        List<Vehicle> vehicleList = this.vehicleRepository.findByAutomakerName(savedVehicle.getModel());
         Assertions.assertThat(vehicleList).isNotEmpty();
-        Assertions.assertThat(vehicleList.get(0).getAutomaker().getName().equals(automakerName));
+        Assertions.assertThat(vehicleList.get(0).getAutomaker().getName().equals(vehicle.getAutomaker().getName()));
     }
 }

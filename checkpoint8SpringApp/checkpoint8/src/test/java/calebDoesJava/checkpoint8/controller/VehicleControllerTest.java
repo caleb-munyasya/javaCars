@@ -59,7 +59,7 @@ class VehicleControllerTest {
     @Test
     void findByModel_ReturnVehicleByModel_WhenSuccessful() {
         String expectedName = VehicleCreator.createVehicle().getModel();
-        ResponseEntity<List<Vehicle>> vehicle = vehicleController.searchByModel(expectedName);
+        ResponseEntity<List<Vehicle>> vehicle = vehicleController.searchByModel(null,expectedName);
 
         Assertions.assertThat(vehicle.getBody().get(0).getModel()).isEqualTo(expectedName);
 
@@ -69,7 +69,7 @@ class VehicleControllerTest {
     @Test
     void searchByAutomaker_ReturnsAVehicle_WhenSuccessful() {
         String expectedName = VehicleCreator.createVehicle().getAutomaker().getName();
-        ResponseEntity<List<Vehicle>> vehicle = vehicleController.searchByModel(expectedName);
+        ResponseEntity<List<Vehicle>> vehicle = vehicleController.searchByModel(null, expectedName);
 
         Assertions.assertThat(vehicle.getBody().get(0).getAutomaker().getName().equals(expectedName));
     }
